@@ -3,7 +3,7 @@ const msgPath = process.env.GIT_PARAMS
 const msg = require('fs').readFileSync(msgPath, 'utf-8').trim()
 
 const commitRE =
-  /^(revert: )?(wip|release|feat|fix|polish|docs|style|refactor|perf|test|workflow|ci|chore|types|build)(\(.+\))?: .{1,50}/
+  /^(revert: )?(wip|release|feat|fix|polish|docs|style|refactor|perf|test|workflow|ci|chore|types|build|新增|修复|文档|样式|重构|优化|测试|打包|日常|回退|初始化)(\(.+\))?: .{1,50}/
 
 if (!commitRE.test(msg)) {
   console.log()
