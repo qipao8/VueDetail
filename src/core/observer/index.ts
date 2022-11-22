@@ -32,7 +32,7 @@ export function toggleObserving(value: boolean) {
   shouldObserve = value
 }
 
-// ssr mock dep
+// ssr模拟dep
 const mockDep = {
   notify: noop,
   depend: noop,
@@ -41,14 +41,11 @@ const mockDep = {
 } as Dep
 
 /**
- * Observer class that is attached to each observed
- * object. Once attached, the observer converts the target
- * object's property keys into getter/setters that
- * collect dependencies and dispatch updates.
+附加到每个观察对象的观察者类。连接后，观察者将目标对象的属性转换为getter/setter，用于收集依赖关系并分派更新。
  */
 export class Observer {
   dep: Dep
-  vmCount: number // number of vms that have this object as root $data
+  vmCount: number // data中的响应式数据数量
 
   constructor(public value: any, public shallow = false, public mock = false) {
     // this.value = value
@@ -73,9 +70,7 @@ export class Observer {
       }
     } else {
       /**
-       * Walk through all properties and convert them into
-       * getter/setters. This method should only be called when
-       * value type is Object.
+      遍历所有属性并将它们转换为getter/setter。仅当值类型为Object时，才应调用此方法。
        */
       const keys = Object.keys(value)
       for (let i = 0; i < keys.length; i++) {

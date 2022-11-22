@@ -14,9 +14,11 @@ import { EffectScope } from 'v3/reactivity/effectScope'
 let uid = 0
 
 export function initMixin(Vue: typeof Component) {
+  // Record定义一个对象的key和value类型,用于初始化时规范options
+  // 组件初始化
   Vue.prototype._init = function (options?: Record<string, any>) {
     const vm: Component = this
-    // a uid
+    // uid作为组件唯一标识
     vm._uid = uid++
 
     let startTag, endTag
@@ -27,15 +29,15 @@ export function initMixin(Vue: typeof Component) {
       mark(startTag)
     }
 
-    // a flag to mark this as a Vue instance without having to do instanceof
+    // 将其标记为Vue实例而不必执行实例化
     // check
     vm._isVue = true
-    // avoid instances from being observed
+    // 避免实例被观察
     vm.__v_skip = true
-    // effect scope
+    // 影响范围
     vm._scope = new EffectScope(true /* detached */)
     vm._scope._vm = true
-    // merge options
+    // 合并选项
     if (options && options._isComponent) {
       // optimize internal component instantiation
       // since dynamic options merging is pretty slow, and none of the

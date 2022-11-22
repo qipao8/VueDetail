@@ -12,13 +12,13 @@ export default class VNode {
   text?: string
   elm: Node | undefined
   ns?: string
-  context?: Component // rendered in this component's scope
+  context?: Component // 在该组件的范围内呈现
   key: string | number | undefined
   componentOptions?: VNodeComponentOptions
-  componentInstance?: Component // component instance
-  parent: VNode | undefined | null // component placeholder node
+  componentInstance?: Component // 组件实例
+  parent: VNode | undefined | null // 组件占位符节点
 
-  // strictly internal
+  // 严格的内部
   raw: boolean // contains raw HTML? (server only)
   isStatic: boolean // hoisted static node
   isRootInsert: boolean // necessary for enter transition check
