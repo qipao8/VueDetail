@@ -4,6 +4,11 @@ vue3的源码在这：[vuejs/core](https://github.com/vuejs/core).
 
 ### 1. 点击查看[项目结构](项目结构.md)
 方便后面了解原理时，查找相应应代码。
+- vscode代码展开与折叠快捷键
+```
+Ctrl+k Ctrl+0/_ : 全部折叠
+Ctrl+k Ctrl+J/=: 全部展开
+```
 
 ### 2. 从new Vue说起
 初始化入口文件在[src/core/instance/index.ts](./src/core/instance/index.ts)

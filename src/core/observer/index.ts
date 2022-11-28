@@ -82,7 +82,7 @@ export class Observer {
   }
 
   /**
-   * Observe a list of Array items.
+   * 观察数组中的每一项
    */
   observeArray(value: any[]) {
     for (let i = 0, l = value.length; i < l; i++) {
@@ -118,7 +118,7 @@ export function observe(
 }
 
 /**
- * Define a reactive property on an Object.
+ * 在一个对象中定义一个响应式属性
  */
 export function defineReactive(
   obj: object,
@@ -208,9 +208,7 @@ export function defineReactive(
 }
 
 /**
- * Set a property on an object. Adds the new property and
- * triggers change notification if the property doesn't
- * already exist.
+ * 设置对象的属性。添加新属性并在该属性不存在时触发更改通知。
  */
 export function set<T>(array: T[], key: number, value: T): T
 export function set<T>(object: object, key: string | number, value: T): T
@@ -270,7 +268,7 @@ export function set(
 }
 
 /**
- * Delete a property and trigger change if necessary.
+ * 删除属性并在必要时触发更改。
  */
 export function del<T>(array: T[], key: number): void
 export function del(object: object, key: string | number): void
@@ -317,8 +315,7 @@ export function del(target: any[] | object, key: any) {
 }
 
 /**
- * Collect dependencies on array elements when the array is touched, since
- * we cannot intercept array element access like property getters.
+ * 当数组被触发时，收集对数组元素的依赖关系，因为我们不能像属性getter那样拦截数组元素访问。
  */
 function dependArray(value: Array<any>) {
   for (let e, i = 0, l = value.length; i < l; i++) {

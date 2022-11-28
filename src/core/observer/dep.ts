@@ -33,7 +33,7 @@ export default class Dep {
   static target?: DepTarget | null
   id: number
   subs: Array<DepTarget | null> // 订阅者
-  // pending subs cleanup
+  // 是否取消订阅
   _pending = false
 
   constructor() {
@@ -44,12 +44,9 @@ export default class Dep {
   addSub(sub: DepTarget) {
     this.subs.push(sub)
   }
-
+  // 采用集中取消订阅
   removeSub(sub: DepTarget) {
-    // #12696 deps with massive amount of subscribers are extremely slow to
-    // clean up in Chromium
-    // to workaround this, we unset the sub for now, and clear them on
-    // next scheduler flush.
+    // #12696 拥有大量订阅用户的dep在Chromium中清理非常缓慢。为了解决这个问题，我们现在取消设置sub，并在下一次调度刷新时清除它们。
     this.subs[this.subs.indexOf(sub)] = null
     if (!this._pending) {
       this._pending = true
