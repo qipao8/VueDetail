@@ -21,18 +21,17 @@ export class EffectScope {
    */
   parent: EffectScope | undefined
   /**
-   * record undetached scopes
+   * 记录未分离的范围
    * @internal
    */
   scopes: EffectScope[] | undefined
   /**
-   * indicates this being a component root scope
+   * 表示这是组件根作用域
    * @internal
    */
   _vm?: boolean
   /**
-   * track a child scope's index in its parent's scopes array for optimized
-   * removal
+   * 跟踪父作用域数组中的子作用域索引，以优化删除
    */
   private index: number | undefined
 

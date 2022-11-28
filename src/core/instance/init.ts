@@ -18,9 +18,10 @@ export function initMixin(Vue: typeof Component) {
   // 组件初始化
   Vue.prototype._init = function (options?: Record<string, any>) {
     const vm: Component = this
-    // uid作为组件唯一标识
+    // uid作为组件唯一标识，代表第几个vue组件
     vm._uid = uid++
 
+    // 用于测试规定时间内的网页性能
     let startTag, endTag
     /* istanbul ignore if */
     if (__DEV__ && config.performance && mark) {
@@ -34,36 +35,36 @@ export function initMixin(Vue: typeof Component) {
     vm._isVue = true
     // 避免实例被观察
     vm.__v_skip = true
-    // 影响范围
-    vm._scope = new EffectScope(true /* detached */)
+    // 影响范围（Vue3正式引入）
+    vm._scope = new EffectScope(true /* 独立的 */)
     vm._scope._vm = true
     // 合并选项
     if (options && options._isComponent) {
-      // optimize internal component instantiation
-      // since dynamic options merging is pretty slow, and none of the
-      // internal component options needs special treatment.
+      // 优化内部组件实例化，因为动态选项合并非常缓慢，并且没有一个内部组件选项需要特殊处理。
       initInternalComponent(vm, options as any)
     } else {
+      // 如果vm是一个vue实例组件，那么会合并参数到$options属性
       vm.$options = mergeOptions(
         resolveConstructorOptions(vm.constructor as any),
         options || {},
         vm
       )
     }
+    // _renderProxy属性用于代理vm对象本身
     /* istanbul ignore else */
     if (__DEV__) {
       initProxy(vm)
     } else {
       vm._renderProxy = vm
     }
-    // expose real self
+    // 暴露真实自我
     vm._self = vm
     initLifecycle(vm)
     initEvents(vm)
     initRender(vm)
     callHook(vm, 'beforeCreate', undefined, false /* setContext */)
     initInjections(vm) // resolve injections before data/props
-    initState(vm)
+    initState(vm)  // 初始化props,methods,data,computed,watch
     initProvide(vm) // resolve provide after data/props
     callHook(vm, 'created')
 
@@ -85,7 +86,7 @@ export function initInternalComponent(
   options: InternalComponentOptions
 ) {
   const opts = (vm.$options = Object.create((vm.constructor as any).options))
-  // doing this because it's faster than dynamic enumeration.
+  // 这样做是因为它比动态枚举更快。
   const parentVnode = options._parentVnode
   opts.parent = options.parent
   opts._parentVnode = parentVnode

@@ -31,7 +31,7 @@ export declare class Component {
   static mixin: GlobalAPI['mixin']
   static use: GlobalAPI['use']
 
-  // public properties
+  // 公共属性
   $el: any // so that we can attach __vue__ to it
   $data: Record<string, any>
   $props: Record<string, any>
@@ -49,7 +49,7 @@ export declare class Component {
   $listeners: Record<string, Function | Array<Function>>
   $isServer: boolean
 
-  // public methods
+  // 公共方法
   $mount: (
     el?: Element | string,
     hydrating?: boolean
@@ -81,7 +81,7 @@ export declare class Component {
     children?: VNodeChildren
   ) => VNode
 
-  // private properties
+  // 私有属性
   _uid: number | string
   _name: string // this only exists in dev mode
   _isVue: true
@@ -115,7 +115,7 @@ export declare class Component {
   _slotsProxy?: Record<string, () => VNode[]>
   _preWatchers?: Watcher[]
 
-  // private methods
+  // 私有方法
 
   // lifecycle
   _init: Function
@@ -134,9 +134,9 @@ export declare class Component {
     refElm?: any
   ) => any
 
-  // createElement
+  // 创建元素
 
-  // _c is internal that accepts `normalizationType` optimization hint
+  // _c是内部的，接受“normalizationType”优化提示
   _c: (
     vnode?: VNode,
     data?: VNodeData,
@@ -207,6 +207,6 @@ export declare class Component {
   _ssrClass: Function
   _ssrStyle: Function
 
-  // allow dynamic method registration
+  // 允许动态方法注册
   // [key: string]: any
 }

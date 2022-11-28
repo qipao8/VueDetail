@@ -44,13 +44,14 @@ const mockDep = {
 附加到每个观察对象的观察者类。连接后，观察者将目标对象的属性转换为getter/setter，用于收集依赖关系并分派更新。
  */
 export class Observer {
-  dep: Dep
+  dep: Dep // 依赖收集者
   vmCount: number // data中的响应式数据数量
-
+  // mock用于判断是否为ssr服务端渲染
   constructor(public value: any, public shallow = false, public mock = false) {
     // this.value = value
     this.dep = mock ? mockDep : new Dep()
     this.vmCount = 0
+    // 在value参数对象上新增__ob__属性，指向Observer观察者类
     def(value, '__ob__', this)
     if (isArray(value)) {
       if (!mock) {
@@ -93,9 +94,7 @@ export class Observer {
 // helpers
 
 /**
- * Attempt to create an observer instance for a value,
- * returns the new observer if successfully observed,
- * or the existing observer if the value already has one.
+ * 尝试为一个值创建一个观察者实例，如果成功观察到，则返回新的观察者，如果该值已经有观察者，则返回现有的观察者。
  */
 export function observe(
   value: any,

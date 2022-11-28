@@ -3,6 +3,7 @@ import { DebuggerEvent } from 'v3/debug'
 import { SetupContext } from 'v3/apiSetup'
 import { Component } from './component'
 
+// 内部组件参数
 export type InternalComponentOptions = {
   _isComponent: true
   parent: Component
