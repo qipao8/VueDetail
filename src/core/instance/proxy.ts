@@ -36,6 +36,7 @@ if (__DEV__) {
 
   const hasProxy = typeof Proxy !== 'undefined' && isNative(Proxy)
 
+  // 处理绑定on事件别名
   if (hasProxy) {
     const isBuiltInModifier = makeMap(
       'stop,prevent,self,ctrl,shift,alt,meta,exact'

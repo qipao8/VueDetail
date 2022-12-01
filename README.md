@@ -17,19 +17,25 @@ Ctrl+k Ctrl+J/=: 全部展开
 
 1. 首先执行initMixin(Vue)函数，内部重构__init方法用于初始化vue实例vm。详见[src/core/instance/init.ts](./src/core/instance/init.ts)
 2. vue组件分为：内部组件(keep-alive、transition、transition-group)和实例组件。根据_isComponent和_isVue区分，初始化生成vm.$options。
-3. 生命周期、事件方法、渲染、数据监听各项初始化，可以看出在beforeCreate时并没有初始化data
+3. 初始化创建vue组件实例->初始化生命周期->绑定事件(事件总线相关)->初始化渲染->beforeCreate->初始化依赖注入&响应式数据->created
 ```
     initLifecycle(vm)
     initEvents(vm)
     initRender(vm)
     callHook(vm, 'beforeCreate', undefined, false /* setContext */)
-    initInjections(vm) // resolve injections before data/props
+    initInjections(vm) // 解析依赖数据 before data/props
     initState(vm)  // 初始化props,methods,data,computed,watch
-    initProvide(vm) // resolve provide after data/props
+    initProvide(vm) // 解析注入数据 after data/props
     callHook(vm, 'created')
 ```
-4. initState: 详见[src/core/instance/state.ts](./src/core/instance/state.ts) 内部使用observer观察者类，即vm.$data.__ob__
-5. observer：详见[src/core/observer/index.ts](./src/core/observer/index.ts)
+#### [VNode](./src/core/vdom/vnode.ts)
+- 虚拟dom就是用js对象的形式描述一个dom节点。操作真实dom非常耗费性能，因此需要vdom减少真实dom操作消耗。对应于vm的 **_vnode** 属性
+- VNode包括：注释节点、文本节点、克隆节点、元素节点(普通元素)、组件节点(SFC单文件组件)、函数式组件节点。
+- VNode主要属性：tag(标签名),data(VNodeData),children(子VNode数组),text,elm(真实dom),context(对应的vm),componentOptions(SFC参数),componentInstance(SFC对应实例),fnContext(函数式组件对应实例),fnOptions(函数式组件参数)
+
+4. initRender：
+5. initState: 详见[src/core/instance/state.ts](./src/core/instance/state.ts) 内部使用observer观察者类，即vm.$data.__ob__
+6. observer：详见[src/core/observer/index.ts](./src/core/observer/index.ts)
 
 
 

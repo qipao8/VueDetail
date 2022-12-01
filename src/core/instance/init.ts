@@ -12,7 +12,7 @@ import type { InternalComponentOptions } from 'types/options'
 import { EffectScope } from 'v3/reactivity/effectScope'
 
 let uid = 0
-
+// 初始化创建vue组件实例->生命周期初始化->绑定事件(事件总线相关)->初始化渲染组件->beforeCreate->初始化依赖注入->created
 export function initMixin(Vue: typeof Component) {
   // Record定义一个对象的key和value类型,用于初始化时规范options
   // 组件初始化
@@ -50,7 +50,7 @@ export function initMixin(Vue: typeof Component) {
         vm
       )
     }
-    // _renderProxy属性用于代理vm对象本身
+    // _renderProxy属性用于代理vm对象本身,initProxy用于区分是否支持ES6的Proxy
     /* istanbul ignore else */
     if (__DEV__) {
       initProxy(vm)
@@ -63,9 +63,9 @@ export function initMixin(Vue: typeof Component) {
     initEvents(vm)
     initRender(vm)
     callHook(vm, 'beforeCreate', undefined, false /* setContext */)
-    initInjections(vm) // resolve injections before data/props
-    initState(vm)  // 初始化props,methods,data,computed,watch
-    initProvide(vm) // resolve provide after data/props
+    initInjections(vm) // 解析依赖数据 before data/props
+    initState(vm) // 初始化props,methods,data,computed,watch
+    initProvide(vm) // 解析注入数据 after data/props
     callHook(vm, 'created')
 
     /* istanbul ignore if */
@@ -80,7 +80,7 @@ export function initMixin(Vue: typeof Component) {
     }
   }
 }
-
+// 初始化内置组件
 export function initInternalComponent(
   vm: Component,
   options: InternalComponentOptions
@@ -102,7 +102,7 @@ export function initInternalComponent(
     opts.staticRenderFns = options.staticRenderFns
   }
 }
-
+// 解析构造器参数
 export function resolveConstructorOptions(Ctor: typeof Component) {
   let options = Ctor.options
   if (Ctor.super) {
@@ -126,7 +126,7 @@ export function resolveConstructorOptions(Ctor: typeof Component) {
   }
   return options
 }
-
+// 解析调整参数
 function resolveModifiedOptions(
   Ctor: typeof Component
 ): Record<string, any> | null {
