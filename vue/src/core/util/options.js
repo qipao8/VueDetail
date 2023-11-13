@@ -385,6 +385,7 @@ function assertObjectType (name: string, value: any, vm: ?Component) {
  * Merge two option objects into a new one.
  * Core utility used in both instantiation and inheritance.
  */
+// mergeOptions 主要用于在创建 Vue 实例或组件时，合并 Vue 构造函数的默认选项和用户提供的选项。这包括 data、methods、computed、watch、components、directives 等。
 export function mergeOptions (
   parent: Object,
   child: Object,

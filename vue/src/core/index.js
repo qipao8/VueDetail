@@ -3,7 +3,7 @@ import { initGlobalAPI } from './global-api/index'
 import { isServerRendering } from 'core/util/env'
 import { FunctionalRenderContext } from 'core/vdom/create-functional-component'
 
-initGlobalAPI(Vue)/workspaces/VueDetail/vue/src/core/global-api
+initGlobalAPI(Vue)
 
 Object.defineProperty(Vue.prototype, '$isServer', {
   get: isServerRendering
