@@ -19,8 +19,8 @@ Ctrl+k Ctrl+J/=: 全部展开
 2. vue组件分为：内部组件(keep-alive、transition、transition-group)和实例组件。根据_isComponent和_isVue区分，初始化生成vm.$options。
 3. 初始化创建vue组件实例->初始化生命周期->绑定事件(事件总线相关)->初始化渲染->beforeCreate->初始化依赖注入&响应式数据->created
 ```
-    initLifecycle(vm)
-    initEvents(vm)
+    initLifecycle(vm) // 初始化refs、children等等
+    initEvents(vm) // 初始化$on绑定事件
     initRender(vm)
     callHook(vm, 'beforeCreate', undefined, false /* setContext */)
     initInjections(vm) // 解析依赖数据 before data/props
@@ -33,7 +33,8 @@ Ctrl+k Ctrl+J/=: 全部展开
 - VNode包括：注释节点、文本节点、克隆节点、元素节点(普通元素)、组件节点(SFC单文件组件)、函数式组件节点。
 - VNode主要属性：tag(标签名),data(VNodeData),children(子VNode数组),text,elm(真实dom),context(对应的vm),componentOptions(SFC参数),componentInstance(SFC对应实例),fnContext(函数式组件对应实例),fnOptions(函数式组件参数)
 
-4. initRender：
+4. eventsMixin：详见[src/core/instance/events.ts](.src/core/instance/events.ts)事件绑定(hook/$on/$once/$off/$emit)
+
 5. initState: 详见[src/core/instance/state.ts](./src/core/instance/state.ts) 内部使用observer观察者类，即vm.$data.__ob__
 6. observer：详见[src/core/observer/index.ts](./src/core/observer/index.ts)
 
