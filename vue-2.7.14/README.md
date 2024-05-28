@@ -28,15 +28,16 @@ Ctrl+k Ctrl+J/=: 全部展开
     initProvide(vm) // 解析注入数据 after data/props
     callHook(vm, 'created')
 ```
+4. eventsMixin：详见[src/core/instance/events.ts](./src/core/instance/events.ts)事件绑定(hook/$on/$once/$off/$emit)
+
+5. initRender: 详见[createElement](./src/core/vdom/create-element.ts)
 #### [VNode](./src/core/vdom/vnode.ts)
 - 虚拟dom就是用js对象的形式描述一个dom节点。操作真实dom非常耗费性能，因此需要vdom减少真实dom操作消耗。对应于vm的 **_vnode** 属性
 - VNode包括：注释节点、文本节点、克隆节点、元素节点(普通元素)、组件节点(SFC单文件组件)、函数式组件节点。
 - VNode主要属性：tag(标签名),data(VNodeData),children(子VNode数组),text,elm(真实dom),context(对应的vm),componentOptions(SFC参数),componentInstance(SFC对应实例),fnContext(函数式组件对应实例),fnOptions(函数式组件参数)
 
-4. eventsMixin：详见[src/core/instance/events.ts](.src/core/instance/events.ts)事件绑定(hook/$on/$once/$off/$emit)
-
-5. initState: 详见[src/core/instance/state.ts](./src/core/instance/state.ts) 内部使用observer观察者类，即vm.$data.__ob__
-6. observer：详见[src/core/observer/index.ts](./src/core/observer/index.ts)
+6. initState: 详见[src/core/instance/state.ts](./src/core/instance/state.ts) 内部使用observer观察者类，即vm.$data.__ob__
+7. observer：详见[src/core/observer/index.ts](./src/core/observer/index.ts)
 
 
 
