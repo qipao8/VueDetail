@@ -14,6 +14,8 @@ import { EffectScope } from 'v3/reactivity/effectScope'
 let uid = 0
 // 初始化创建vue组件实例->生命周期初始化->绑定事件(事件总线相关)->初始化渲染组件->beforeCreate->初始化依赖注入->created
 export function initMixin(Vue: typeof Component) {
+    console.log(Vue);
+    
   // Record定义一个对象的key和value类型,用于初始化时规范options
   // 组件初始化
   Vue.prototype._init = function (options?: Record<string, any>) {

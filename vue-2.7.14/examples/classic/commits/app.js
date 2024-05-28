@@ -14,6 +14,7 @@ new Vue({
   },
 
   created: function () {
+    console.log('created')
     this.fetchData()
   },
 
