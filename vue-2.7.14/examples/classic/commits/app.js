@@ -18,6 +18,12 @@ new Vue({
     this.fetchData()
   },
 
+  computed: {
+    test() {
+      return this.currentBranch
+    }
+  },
+
   watch: {
     currentBranch: 'fetchData'
   },
@@ -42,6 +48,9 @@ new Vue({
         console.log(self.commits[0].html_url)
       }
       xhr.send()
+    },
+    clickDate() {
+      this.record.commit.author.date = 'null'
     }
   }
 })
