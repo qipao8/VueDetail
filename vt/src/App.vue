@@ -5,11 +5,24 @@ export default {
   components: {
     HelloWorld
   },
-  created(){
-    console.log('created');
+  data(){
+    return {
+        name:'injectTestProvide'
+    }
   },
-  mounted(){
-    console.log('mounted');
+  provide() {
+    return { injectTest: this.name  }
+  },
+  created() {
+    console.log('created')
+  },
+  mounted() {
+    console.log('mounted')
+  },
+  methods:{
+    changeName(){
+        this.name='test'
+    }
   }
 }
 </script>
@@ -23,18 +36,19 @@ export default {
         src="@/assets/logo.svg"
         width="125"
         height="125"
+        @click="changeName"
       />
 
       <div class="wrapper">
-        <hello-world :msg="'test'"></hello-world>
-        <nav>
+        <hello-world :msg="'test'" :name="name"></hello-world>
+        <!-- <nav>
           <router-link to="/">Home</router-link>
           <router-link to="/about">About</router-link>
-        </nav>
+        </nav> -->
       </div>
     </header>
 
-    <router-view />
+    <!-- <router-view /> -->
   </div>
 </template>
 

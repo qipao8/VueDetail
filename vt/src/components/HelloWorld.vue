@@ -1,15 +1,36 @@
-<script setup>
-defineProps({
-  msg: {
-    type: String,
-    required: true
+<script>
+export default {
+  name: 'hello-world',
+  props: {
+    msg: {
+      type: String,
+      required: true
+    },
+    name: ''
+  },
+  data() {
+    return {
+      curValue: ''
+    }
+  },
+  computed: {
+    curWatchValue() {
+      console.log(this.name,'computed')
+      return this.name
+    }
+  },
+  watch: {
+    name(val, old) {
+      this.curValue = val
+      console.log(val, old)
+    }
   }
-})
+}
 </script>
 
 <template>
   <div class="greetings">
-    <h1 class="green">{{ msg }}</h1>
+    <h1 class="green">{{ curWatchValue }}</h1>
     <h3>
       You’ve successfully created a project with
       <a target="_blank" href="https://vitejs.dev/">Vite</a> +

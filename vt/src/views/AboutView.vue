@@ -1,6 +1,15 @@
+<script>
+export default {
+  name: 'about',
+  inject: {
+    injectTest: {}
+  }
+}
+</script>
+
 <template>
   <div class="about">
-    <h1>This is an about page</h1>
+    <h1>This is an about page {{injectTest}}</h1>
   </div>
 </template>
 

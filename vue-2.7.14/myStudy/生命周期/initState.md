@@ -1,0 +1,21 @@
+```javascript
+export function initState(vm: Component) {
+  const opts = vm.$options
+  if (opts.props) initProps(vm, opts.props)
+
+  // Composition API
+  initSetup(vm)
+
+  if (opts.methods) initMethods(vm, opts.methods)
+  if (opts.data) {
+    initData(vm)
+  } else {
+    const ob = observe((vm._data = {}))
+    ob && ob.vmCount++
+  }
+  if (opts.computed) initComputed(vm, opts.computed)
+  if (opts.watch && opts.watch !== nativeWatch) {
+    initWatch(vm, opts.watch)
+  }
+}
+```
