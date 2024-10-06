@@ -1,0 +1,12 @@
+{
+    "compilerOptions": {
+      "allowJs": true, // 允许ts编译器处理js文件
+      "outDir": "./types", // 指定输出目录
+      "module": "commonjs", // 指定生成的文件使用commonjs模块
+      "target": "es5" // 指定目标语言的版本
+    },
+    "include": [
+      "./src/**/*", // 包含src目录下所有文件
+      "**/*.js"
+    ]
+  }
